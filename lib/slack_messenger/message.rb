@@ -1,9 +1,7 @@
 module SlackMessenger
   class Message
-    def initialize(text, channel='#general', user=nil, attachments={})
+    def initialize(text, attachments={})
       @text         = text
-      @channel      = channel
-      @user         = user
       @attachments  = attachments
     end
 
@@ -12,16 +10,9 @@ module SlackMessenger
     end
 
     def as_json
-      {
-        text: @text,
-        channel: @channel,
-        user: @user,
-        attachments: @attachments.map(&:as_json)
-      }
-    end
-
-    def valid
-      true # TODO: check validity
+      hash = {text: @text}
+      hash[:attachments] = @attachments.map(&:as_json) unless @attachments.nil? || @attachments.empty?
+      hash
     end
   end
 end

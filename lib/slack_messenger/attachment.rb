@@ -1,27 +1,27 @@
 module SlackMessenger
   class Attachment
     def initialize(options = {})
-      @fallback = options.fetch :fallback
-      @color = options.fetch :color, '#36a64f'
-      @pretext = options.fetch :pretext
-      @author_name = options.fetch :author_name
-      @author_link = options.fetch :author_link
-      @author_icon = options.fetch :author_icon
-      @title = options.fetch :title
-      @title_link = options.fetch :title_link
-      @text = options.fetch :text, ""
-      @fields = options.fetch :fields, {}
-      @image_url = options.fetch :image_url
-      @thumb_url = options.fetch :thumb_url
-      @footer = options.fetch :footer
-      @footer_icon = options.fetch :footer_icon
-      @ts = DateTime.now unless options[:ts]
+      @fallback = options[:fallback]
+      @color = options[:color] || '#36a64f'
+      @pretext = options[:pretext]
+      @author_name = options[:author_name]
+      @author_link = options[:author_link]
+      @author_icon = options[:author_icon]
+      @title = options[:title]
+      @title_link = options[:title_link]
+      @text = options[:text] || ""
+      @fields = options[:fields] || []
+      @image_url = options[:image_url]
+      @thumb_url = options[:thumb_url]
+      @footer = options[:footer]
+      @footer_icon = options[:footer_icon]
+      @ts = options[:ts] || false
     end
 
     def as_json
       hash = {}
       hash[:fallback] = @fallback unless @fallback.nil?
-      hash[:options] = @color
+      hash[:color] = @color
       hash[:pretext] = @pretext unless @pretext.nil?
       hash[:author_name] = @author_name unless @author_name.nil?
       hash[:author_link] = @author_name unless @author_link.nil?
@@ -34,7 +34,7 @@ module SlackMessenger
       hash[:thumb_url] = @thumb_url unless @thumb_url.nil?
       hash[:footer] = @footer unless @footer.nil?
       hash[:footer_icon] = @footer_icon unless @footer_icon.nil?
-      hash[:ts] = @ts unless @ts.nil?
+      hash[:ts] = Time.now.to_i if @ts
 
       hash
     end
