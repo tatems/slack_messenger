@@ -12,16 +12,20 @@ module SlackMessenger
     end
 
     def self.send(message, api = nil)
-      api = SlackMessenger.default_api if api.nil?
+      if api.nil?
+        api = SlackMessenger.default_api
+      end
 
-      raise "default_api not set" if api.nil?
-      raise "No slack endpoint set" if api.endpoint.nil?
+      raise ApiNotSetError.new if api.nil?
+      raise EndpointNotSetError.new if api.endpoint.nil? || api.endpoint == ""
 
       result = HTTParty.post(api.endpoint, body: message.as_json.to_json)
-      if result.code == 200
+
+      case result.code
+      when 200
         true
       else
-        false
+        raise SendError.new result.code
       end
     end
   end

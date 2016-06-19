@@ -1,3 +1,4 @@
+require "slack_messenger/error"
 require "slack_messenger/version"
 require "slack_messenger/api"
 require "slack_messenger/message"
@@ -15,7 +16,7 @@ module SlackMessenger
   end
 
   def self.default_api
-    configuration.default_api
+    configuration.default_api rescue nil
   end
 
   def self.attachment_color
