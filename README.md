@@ -103,9 +103,9 @@ Attachments can take a number of options:
 #### `AttachmentField` Options
 AttachmentFields can take 3 options
 ```ruby
-title:      # Bolded text at the top of field
-value:      # Unformatted text that appears in body of field
-short:      # Boolean value that sets width of field to 50% if true, otherwise is 100% of message width
+:title      # Bolded text at the top of field
+:value      # Unformatted text that appears in body of field
+:short      # Boolean value that sets width of field to 50% if true, otherwise is 100% of message width
 ```
 
 
