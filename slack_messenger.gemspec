@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["josh@joshtate.me"]
 
   spec.summary       = "Easy sending of Slack notifications"
-  spec.homepage      = "github.com/jt-platterz/slack_messenger"
+  spec.homepage      = "https://github.com/jt-platterz/slack_messenger"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
