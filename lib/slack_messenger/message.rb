@@ -1,12 +1,15 @@
 module SlackMessenger
   class Message
-    def initialize(text, attachments={})
-      @text         = text
-      @attachments  = attachments
+    def initialize(options = {})
+      @text = options[:text] || ""
+
+      if options.has_key? :attachments
+        @attachments = options[:attachments].is_a?(Array) ? options[:attachments] : [options[:attachments]]
+      end
     end
 
-    def send!
-      Api.send self
+    def send! override_api = nil
+      Api.send(self, override_api)
     end
 
     def as_json

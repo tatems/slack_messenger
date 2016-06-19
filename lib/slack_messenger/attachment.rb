@@ -2,7 +2,7 @@ module SlackMessenger
   class Attachment
     def initialize(options = {})
       @fallback = options[:fallback]
-      @color = options[:color] || '#36a64f'
+      @color = options[:color] || SlackMessenger.attachment_color
       @pretext = options[:pretext]
       @author_name = options[:author_name]
       @author_link = options[:author_link]
@@ -10,7 +10,11 @@ module SlackMessenger
       @title = options[:title]
       @title_link = options[:title_link]
       @text = options[:text] || ""
-      @fields = options[:fields] || []
+
+      if options.has_key? :fields
+        @fields = options[:fields].is_a?(Array) ? options[:fields] : [options[:fields]]
+      end
+      
       @image_url = options[:image_url]
       @thumb_url = options[:thumb_url]
       @footer = options[:footer]

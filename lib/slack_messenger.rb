@@ -18,11 +18,17 @@ module SlackMessenger
     configuration.default_api
   end
 
+  def self.attachment_color
+    configuration.attachment_color
+  end
+
   class Configuration
     attr_accessor :default_api
+    attr_accessor :attachment_color
 
     def initialize
-      @default_api = nil
+      self.default_api = SlackMessenger::Api.new ENV['SLACK_API_ENDPOINT']
+      self.attachment_color = '#000000'
     end
   end
 end
